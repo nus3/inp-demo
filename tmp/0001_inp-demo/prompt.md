@@ -138,3 +138,129 @@ GitHub Actions ワークフローのすべての action を SHA 指定に変更�
 - `actions/deploy-pages@v4.0.5` → `actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5`
 
 各 action の最新リリースの commit SHA を取得し、コメントでバージョンを明記しました。
+
+---
+
+## AI Guide の作成
+
+/update-ai-guide コマンドを実行し、ai-guide ドキュメントを作成しました。
+
+### 作成したドキュメント
+
+1. **ai-guide/inp-measurement.md**
+   - PerformanceObserver を使った INP 計測の基本パターン
+   - interactionId の扱い方
+   - 98パーセンタイル値の計算
+   - クロージャによる状態管理パターン
+   - よくあるエラーと対処法
+
+2. **ai-guide/github-actions.md**
+   - Action の SHA 指定パターン
+   - SHA の取得方法
+   - よく使う Action の SHA リスト（2025年10月時点）
+   - GitHub Pages デプロイパターン
+   - Vite プロジェクトの注意点
+
+3. **ai-guide/project-conventions.md**
+   - class構文を避ける理由とパターン
+   - ファイル構成
+   - ドキュメント構成（docs/ と ai-guide/ の違い）
+   - 技術スタック
+   - 命名規則
+
+将来のAIが実装する際に参照すべき最小限の情報を30行以内にまとめました。
+
+---
+
+## CI ワークフローの追加
+
+main ブランチへマージする前にビルドチェックを行う GitHub Actions ワークフローを追加しました。
+
+### 作成したワークフロー
+
+**.github/workflows/ci.yml**
+- トリガー条件:
+  - main 以外のブランチへのプッシュ
+  - main ブランチへの Pull Request
+  - 手動実行
+- 実行内容:
+  1. pnpm install で依存関係をインストール
+  2. pnpm run build でビルド実行
+  3. dist/ ディレクトリと index.html の存在確認
+- 使用する action はすべて SHA 指定
+
+### ローカルビルド確認
+
+```
+✓ built in 74ms
+dist/index.html                 3.65 kB │ gzip: 1.42 kB
+dist/assets/index-DaUnEHYx.css  4.96 kB │ gzip: 1.40 kB
+dist/assets/index-CLWfH1ug.js   5.22 kB │ gzip: 2.24 kB
+```
+
+ビルドが正常に完了することを確認しました。
+
+---
+
+## ワークフローの修正
+
+以下の指摘に対応しました:
+
+1. **package.json にバージョン指定**
+   - `engines.node: ">=22"` を追加
+   - `packageManager: "pnpm@10.17.1"` は既に設定済み
+
+2. **CI ワークフローの修正**
+   - Setup pnpm の `version: 10` を削除（package.json から読み取る）
+   - Node.js を 22 に変更
+   - Check build output ステップを削除
+   - `permissions: contents: read` を追加（必要最低限の権限）
+
+3. **Deploy ワークフローの修正**
+   - Setup pnpm の `version: 10` を削除
+   - Node.js は既に 22 に設定済み
+   - permissions は既に適切に設定済み
+
+---
+
+## AI Guide の更新（2回目）
+
+/update-ai-guide コマンドを再実行し、最新の変更を反映しました。
+
+### 更新内容
+
+**ai-guide/github-actions.md** に以下を追加:
+
+1. **Permissions の設定**
+   - CI: `contents: read` のみ
+   - Deploy: `contents: read`, `pages: write`, `id-token: write`
+
+2. **バージョン管理のベストプラクティス**
+   - package.json で一元管理（`packageManager`, `engines.node`）
+   - ワークフローでの使用パターン（良い例・悪い例）
+
+3. **CI/CD の分離パターン**
+   - CI ワークフロー: main 以外のブランチとPR
+   - Deploy ワークフロー: main ブランチのみ
+
+将来のAIが参照しやすいよう、具体的なコード例とともに記載しました。
+
+---
+
+## CI ワークフローのトリガー条件修正
+
+CI アクションが二重実行される問題を修正しました。
+
+### 変更内容
+
+**.github/workflows/ci.yml**
+- `push: branches-ignore: [main]` を削除
+- `pull_request: branches: [main]` のみに変更
+
+### 理由
+
+PRを作成すると、以下の2つのトリガーが発動していました:
+1. ブランチへのプッシュ（`push: branches-ignore: [main]`）
+2. PRの作成（`pull_request: branches: [main]`）
+
+Pull Request のトリガーのみにすることで、CI は PR 作成時に一度だけ実行されます。
