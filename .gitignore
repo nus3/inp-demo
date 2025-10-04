@@ -25,4 +25,3 @@ lerna-debug.log*
 
 # AIとのやり取りで一時的に保存したい情報を格納するディレクトリ
 tmp-nus3
-tmp/
