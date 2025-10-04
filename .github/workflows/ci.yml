@@ -2,11 +2,6 @@
 name: CI
 
 on:
-  # main 以外のブランチへのプッシュでトリガー
-  push:
-    branches-ignore:
-      - main
-
   # Pull Request でトリガー
   pull_request:
     branches:

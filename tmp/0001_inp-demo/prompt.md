@@ -244,3 +244,23 @@ dist/assets/index-CLWfH1ug.js   5.22 kB │ gzip: 2.24 kB
    - Deploy ワークフロー: main ブランチのみ
 
 将来のAIが参照しやすいよう、具体的なコード例とともに記載しました。
+
+---
+
+## CI ワークフローのトリガー条件修正
+
+CI アクションが二重実行される問題を修正しました。
+
+### 変更内容
+
+**.github/workflows/ci.yml**
+- `push: branches-ignore: [main]` を削除
+- `pull_request: branches: [main]` のみに変更
+
+### 理由
+
+PRを作成すると、以下の2つのトリガーが発動していました:
+1. ブランチへのプッシュ（`push: branches-ignore: [main]`）
+2. PRの作成（`pull_request: branches: [main]`）
+
+Pull Request のトリガーのみにすることで、CI は PR 作成時に一度だけ実行されます。
