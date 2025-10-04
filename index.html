@@ -38,6 +38,54 @@
       </div>
     </section>
 
+    <section class="monitor-section">
+      <h2>Long Tasks と Long Animation Frames の監視</h2>
+      <p class="section-description">
+        Chromium ベースのブラウザ（Chrome, Edge）でのみ利用可能な高度なパフォーマンス監視APIです。
+      </p>
+
+      <!-- ブラウザサポート警告 -->
+      <div id="api-support-warning" class="warning-banner" style="display: none;">
+        <!-- JavaScript で動的に表示 -->
+      </div>
+
+      <div class="api-monitors">
+        <!-- Long Tasks セクション -->
+        <div class="monitor-card" id="longtasks-section">
+          <h3>Long Tasks API</h3>
+          <p class="api-description">
+            50ms以上メインスレッドを占有するタスクを検出します。
+            <br>
+            <small>サポート: Chrome 58+, Edge 79+</small>
+          </p>
+          <button id="toggle-longtasks" class="btn btn-primary" disabled>
+            監視開始
+          </button>
+          <div id="longtasks-stats" class="stats-display">
+            検出数: <span id="longtasks-count">0</span>
+          </div>
+          <div id="longtasks-list" class="tasks-list"></div>
+        </div>
+
+        <!-- Long Animation Frames セクション -->
+        <div class="monitor-card" id="loaf-section">
+          <h3>Long Animation Frames API</h3>
+          <p class="api-description">
+            長時間実行されるアニメーションフレームを詳細に計測します。
+            <br>
+            <small>サポート: Chrome 123+, Edge 123+</small>
+          </p>
+          <button id="toggle-loaf" class="btn btn-primary" disabled>
+            監視開始
+          </button>
+          <div id="loaf-stats" class="stats-display">
+            検出数: <span id="loaf-count">0</span>
+          </div>
+          <div id="loaf-list" class="loaf-list"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="demo-section">
       <h2>良い INP の例</h2>
       <div class="demo-card good">
@@ -84,6 +132,24 @@
         </button>
         <div id="calculation-result" class="result-display"></div>
       </div>
+
+      <div class="demo-card poor">
+        <h3>レイアウトスラッシング</h3>
+        <p>500個の要素を作成し、読み取りと書き込みを交互に複数回実行。強制的にレイアウト再計算を大量に発生させます。</p>
+        <button id="bad-layout" class="btn btn-danger demo-btn">
+          レイアウトスラッシングを実行
+        </button>
+        <div id="layout-container" class="dom-container"></div>
+      </div>
+
+      <div class="demo-card poor">
+        <h3>複雑なスタイル計算</h3>
+        <p>800個の要素に複雑なスタイル（グラデーション、シャドウ、フィルタ）を5回変更し、スタイル再計算を強制します。</p>
+        <button id="bad-style-calc" class="btn btn-danger demo-btn">
+          複雑なスタイル計算を実行
+        </button>
+        <div id="style-calc-container" class="dom-container"></div>
+      </div>
     </section>
 
     <footer>
@@ -93,7 +159,11 @@
         </a>
         |
         <a href="./docs/inp-measurement.md" target="_blank">
-          INP計測方法のドキュメント
+          INP計測方法
+        </a>
+        |
+        <a href="./docs/long-tasks-and-loaf.md" target="_blank">
+          Long Tasks & LoAF API
         </a>
       </p>
     </footer>
