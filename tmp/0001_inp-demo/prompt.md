@@ -138,3 +138,34 @@ GitHub Actions ワークフローのすべての action を SHA 指定に変更�
 - `actions/deploy-pages@v4.0.5` → `actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5`
 
 各 action の最新リリースの commit SHA を取得し、コメントでバージョンを明記しました。
+
+---
+
+## AI Guide の作成
+
+/update-ai-guide コマンドを実行し、ai-guide ドキュメントを作成しました。
+
+### 作成したドキュメント
+
+1. **ai-guide/inp-measurement.md**
+   - PerformanceObserver を使った INP 計測の基本パターン
+   - interactionId の扱い方
+   - 98パーセンタイル値の計算
+   - クロージャによる状態管理パターン
+   - よくあるエラーと対処法
+
+2. **ai-guide/github-actions.md**
+   - Action の SHA 指定パターン
+   - SHA の取得方法
+   - よく使う Action の SHA リスト（2025年10月時点）
+   - GitHub Pages デプロイパターン
+   - Vite プロジェクトの注意点
+
+3. **ai-guide/project-conventions.md**
+   - class構文を避ける理由とパターン
+   - ファイル構成
+   - ドキュメント構成（docs/ と ai-guide/ の違い）
+   - 技術スタック
+   - 命名規則
+
+将来のAIが実装する際に参照すべき最小限の情報を30行以内にまとめました。
