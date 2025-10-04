@@ -118,3 +118,23 @@ inp-monitor.js を関数ベースの実装に変更しました:
    - class構文の例を削除
 
 変更完了。Viteの開発サーバーで動作確認が可能です。
+
+---
+
+## 追加の指示
+
+.github/workflows/deploy.yml について:
+- uses する action は SHA 指定にして欲しい
+
+### 対応内容
+
+GitHub Actions ワークフローのすべての action を SHA 指定に変更しました:
+
+- `actions/checkout@v4.3.0` → `actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0`
+- `pnpm/action-setup@v4.1.0` → `pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0`
+- `actions/setup-node@v4.4.0` → `actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0`
+- `actions/configure-pages@v5.0.0` → `actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0`
+- `actions/upload-pages-artifact@v3.0.1` → `actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1`
+- `actions/deploy-pages@v4.0.5` → `actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5`
+
+各 action の最新リリースの commit SHA を取得し、コメントでバージョンを明記しました。
