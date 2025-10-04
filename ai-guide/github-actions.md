@@ -75,3 +75,78 @@ export default {
   base: '/リポジトリ名/'
 }
 ```
+
+## Permissions の設定
+
+### 必要最低限の権限のみ付与
+
+```yaml
+# CI ワークフロー（ビルドチェックのみ）
+permissions:
+  contents: read
+
+# Deploy ワークフロー（GitHub Pages デプロイ）
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+```
+
+## バージョン管理のベストプラクティス
+
+### package.json で一元管理
+
+```json
+{
+  "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": ">=22"
+  }
+}
+```
+
+### ワークフローでの使用
+
+```yaml
+# ❌ 悪い例: バージョンをハードコード
+- uses: pnpm/action-setup@{SHA}
+  with:
+    version: 10
+
+# ✅ 良い例: package.json から自動取得
+- uses: pnpm/action-setup@{SHA}
+
+- uses: actions/setup-node@{SHA}
+  with:
+    node-version: 22  # engines.node と一致させる
+```
+
+## CI/CD の分離パターン
+
+### CI ワークフロー (ci.yml)
+
+```yaml
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    steps:
+      - run: pnpm install
+      - run: pnpm run build
+```
+
+### Deploy ワークフロー (deploy.yml)
+
+```yaml
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build: # ビルドステップ
+  deploy: # デプロイステップ
+```

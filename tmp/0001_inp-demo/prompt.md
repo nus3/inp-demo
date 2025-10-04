@@ -220,3 +220,27 @@ dist/assets/index-CLWfH1ug.js   5.22 kB │ gzip: 2.24 kB
    - Setup pnpm の `version: 10` を削除
    - Node.js は既に 22 に設定済み
    - permissions は既に適切に設定済み
+
+---
+
+## AI Guide の更新（2回目）
+
+/update-ai-guide コマンドを再実行し、最新の変更を反映しました。
+
+### 更新内容
+
+**ai-guide/github-actions.md** に以下を追加:
+
+1. **Permissions の設定**
+   - CI: `contents: read` のみ
+   - Deploy: `contents: read`, `pages: write`, `id-token: write`
+
+2. **バージョン管理のベストプラクティス**
+   - package.json で一元管理（`packageManager`, `engines.node`）
+   - ワークフローでの使用パターン（良い例・悪い例）
+
+3. **CI/CD の分離パターン**
+   - CI ワークフロー: main 以外のブランチとPR
+   - Deploy ワークフロー: main ブランチのみ
+
+将来のAIが参照しやすいよう、具体的なコード例とともに記載しました。
