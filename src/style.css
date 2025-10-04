@@ -361,3 +361,329 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Long Tasks & LoAF Monitoring Styles */
+.section-description {
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.warning-banner {
+  background-color: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.warning-banner p {
+  margin: 0;
+  color: #92400e;
+  font-size: 0.9375rem;
+}
+
+.warning-banner strong {
+  color: #78350f;
+}
+
+.api-monitors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.api-description {
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.api-description small {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.stats-display {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-card-bg);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.stats-display span {
+  color: var(--color-primary);
+  font-size: 1.125rem;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Long Tasks List */
+.tasks-list {
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.task-item {
+  background-color: var(--color-card-bg);
+  border-left: 3px solid var(--color-danger);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.task-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.task-item-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.task-item-time {
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+}
+
+.task-item-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.task-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  font-size: 0.8125rem;
+}
+
+.task-stat-label {
+  color: var(--color-secondary);
+}
+
+.task-stat-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* LoAF List */
+.loaf-list {
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.loaf-item {
+  background-color: var(--color-card-bg);
+  border-left: 3px solid #8b5cf6;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.loaf-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.loaf-item-duration {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.loaf-item-time {
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+}
+
+.loaf-timeline {
+  background-color: var(--color-bg);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.loaf-timeline-title {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.loaf-phases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.loaf-phase {
+  text-align: center;
+  padding: 0.5rem;
+  background-color: var(--color-card-bg);
+  border-radius: 0.25rem;
+}
+
+.loaf-phase-label {
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.loaf-phase-value {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.loaf-scripts {
+  background-color: var(--color-bg);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.loaf-scripts-title {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.loaf-script {
+  padding: 0.5rem;
+  background-color: var(--color-card-bg);
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.loaf-script:last-child {
+  margin-bottom: 0;
+}
+
+.loaf-script-name {
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-all;
+}
+
+.loaf-script-duration {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.empty-list-message {
+  text-align: center;
+  color: var(--color-secondary);
+  padding: 2rem;
+  font-size: 0.875rem;
+}
+
+/* Layout and Style Calculation Demo Items */
+.layout-item {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.style-calc-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Frame Timings Display */
+.loaf-frame-timings {
+  background-color: var(--color-bg);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-top: 0.75rem;
+}
+
+.loaf-frame-timings-title {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.info-tooltip {
+  cursor: help;
+  font-size: 0.875rem;
+}
+
+.frame-timings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.frame-timing-item {
+  background-color: var(--color-card-bg);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.frame-timing-label {
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.frame-timing-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.frame-timing-desc {
+  font-size: 0.7rem;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+/* Responsive for API monitors */
+@media (max-width: 768px) {
+  .api-monitors {
+    grid-template-columns: 1fr;
+  }
+
+  .loaf-phases {
+    grid-template-columns: 1fr;
+  }
+
+  .frame-timings-grid {
+    grid-template-columns: 1fr;
+  }
+}
