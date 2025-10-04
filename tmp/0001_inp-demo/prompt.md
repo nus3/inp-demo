@@ -264,3 +264,82 @@ PRを作成すると、以下の2つのトリガーが発動していました:
 2. PRの作成（`pull_request: branches: [main]`）
 
 Pull Request のトリガーのみにすることで、CI は PR 作成時に一度だけ実行されます。
+
+---
+
+## 作業完了
+
+### 完成した成果物
+
+1. **INPデモサイト**
+   - PerformanceObserver API と Event Timing API を使用した自前のINP計測実装
+   - 関数ベースの実装（class構文を使用しない、クロージャで状態管理）
+   - 良いINP/悪いINPのデモ実装
+   - レスポンシブデザインのUI
+
+2. **ドキュメント**
+   - `docs/inp-measurement.md`: 標準Web APIを使ったINP計測方法の説明
+   - `ai-guide/inp-measurement.md`: INP計測の実装パターン
+   - `ai-guide/github-actions.md`: GitHub Actionsのセキュリティパターン
+   - `ai-guide/project-conventions.md`: プロジェクト規約
+
+3. **GitHub Actions**
+   - `ci.yml`: PR作成時のビルドチェック（SHA指定、permissions設定）
+   - `deploy.yml`: mainブランチへのGitHub Pagesデプロイ（SHA指定、permissions設定）
+
+4. **技術スタック**
+   - pnpm (v10.17.1) + Vite + 素のHTML/CSS/JavaScript
+   - Node.js 22
+   - GitHub Pages
+
+### 主要な設計判断
+
+- class構文を避け、クロージャで状態管理
+- web-vitalsライブラリを使わず標準Web APIで実装
+- GitHub Actionsは全てSHA指定でセキュリティ強化
+- バージョン管理をpackage.jsonで一元化
+- CI/CDを分離（ビルドチェックとデプロイ）
+
+### 次のステップ
+
+1. ローカルでの動作確認（開発サーバー起動中: http://localhost:5173/inp-demo/）
+2. Gitリポジトリへのコミット
+3. GitHubへのプッシュ
+4. GitHub Pagesの設定
+5. 自動デプロイの確認
+
+---
+
+## INP改善アプローチのドキュメント作成
+
+現在の実装にある「悪いINP」のパターンに対する改善アプローチをまとめました。
+
+### 作成したドキュメント
+
+**docs/inp-improvement.md**
+
+以下の3つの悪いINPパターンに対する改善方法を記載:
+
+1. **ブロッキング処理の改善**
+   - setTimeout による処理の分割
+   - requestIdleCallback の使用
+   - 処理の最適化
+
+2. **大量のDOM操作の改善**
+   - 仮想スクロール (Virtual Scrolling)
+   - requestAnimationFrame で分割レンダリング
+   - CSS contain プロパティの活用
+
+3. **重い同期計算の改善**
+   - Web Worker の使用
+   - メモ化による最適化
+   - イテレーティブな実装
+
+### 構成
+
+- 各パターンごとに「問題点」「改善アプローチ」「効果」を明記
+- 具体的なコード例を提示
+- 改善の優先順位を説明
+- INP改善の効果測定方法を記載
+
+ユーザーが実際にデモサイトの悪いINPを改善する際の実践的なガイドとして活用できます。
